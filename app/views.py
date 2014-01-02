@@ -21,7 +21,7 @@ def index(page=1):
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body = form.body.data,
-                    short = re.sub('<[A-Za-z\/][^>]*>', '', form.body.data), 
+                    short = re.sub('<[A-Za-z\/][^>]*>', '', form.body.data)[:200], 
                     title = form.title.data,
                     thumbnail_link = form.picture.data, 
                     timestamp = datetime.utcnow(),
