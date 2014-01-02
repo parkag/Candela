@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Cześć, {{user.nickname}}</p>
+<h2>Aktualności:</h2>
+
+    <div class="row-fluid">
+    	<div class="span12">
+    		<div class="row-fluid">
+    			<div class="span9">
+    				<!--{% for post in posts %}
+					{% include 'post.html' %}
+					{% endfor %}-->
+				</div>
+    			<div class="span3" style='border:2px dashed'>
+    				Tutaj wrzucamy gotowe notatki z zajęć. Mogą być uaktualniane w trakcie semestru.
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+<div class="well">
+	<form class ="form-horizontal" action = "" method="post" name="post">
+		{{form.hidden_tag()}}
+		<table>
+			<tr><td>Napisz cos:</td></tr>
+			<tr><td>Tytuł:{{ form.title(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>Treść:{{ form.body(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>Link do miniaturki: {{ form.picture(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>
+				{% for error in form.errors.post %}
+				<span style ="color: red;">[{{error}}]</span><br>
+				{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type ="submit" value="Wyślij"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+{% endblock %}

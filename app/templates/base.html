@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang ="pl">
+	<head>
+		<link href ="{{ url_for('.static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+		<link href ="{{ url_for('.static', filename='css/bootstrap-responsive.css') }}" rel = "stylesheet">
+		<link href ="{{ url_for('.static', filename='css/custom.css') }}" rel = "stylesheet">
+		<link rel="shortcut icon" href="http://www.fizyka.pw.edu.pl/images/favicon.ico" />
+		<script src ="http://code.jquery.com/jquery.js"></script>
+		<script src = "url_for('.static', filename='js/bootstrap.min.js') }}"></script>
+		<script src="url_for('.static', filename='js/moment-with-langs.min.js') }}"></script>
+
+		<meta name="viewport" content="width=device.width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+  			tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		
+		<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+		<script type="text/javascript">
+			tinymce.init({
+    			selector: "textarea",
+    			plugins: [
+       				"advlist autolink lists link preview anchor",
+        			"searchreplace visualblocks code",
+        			"media paste"
+    			],
+    			menubar: "edit insert view format tools",
+    			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link"
+			});
+		</script>
+
+		{% if title %}
+		<title>{{title}} - Candela</title>
+		{% else %}
+		<title>Candela - Wydział Fizyki PW</title>
+		{% endif %}
+	</head>
+	<body>
+		<div class="navbar navbar-default navbar-static-top" style="margin-bottom:0px">
+			<div class = "navbar-header">
+				<button type="button" class = "navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class ="navbar-brand" href="/"> Candela </a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class = "nav navbar-nav">	
+					<li><a href = "{{ url_for('notes') }}">Notatki</a></li>
+					<li><a href = "{{ url_for('questions') }}">Zadania</a></li>
+					<li><a href = "{{ url_for('stream') }}">Strumień</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					
+					{% if g.user.is_authenticated() %}
+					<!-- Profil -->
+					<li><a href="#"><span class="glyphicon glyphicon-search"></a></li>
+					<li><a href = "{{ url_for('profile', nickname = g.user.nickname) }}"><span class="glyphicon glyphicon-user"></span></a></li>
+					<!-- Wyloguj -->				
+					<li><a href = "{{ url_for('logout') }}"> <span class="glyphicon glyphicon-off"></span> </a></li>				
+					
+					{% else %}
+					<li><a href = "{{ url_for('login') }}"> Zaloguj </a></li>
+					<!--
+					<li class = "divider-vertical"></li>
+					<li class = "dropdown">
+						<a class="dropdown-toggle" href ="#" data-toggle="dropdown"> Zaloguj <strong class="caret"></strong></a>
+						<div class = "dropdown-menu" style ="padding: 15px; padding-bottom: 10px; width: 200px ">
+						Nazwa użytkownika<br>
+						Hasło<br>
+						Zapamiętaj<br>
+						<hr>
+						Jeszcze nie masz konta? Zarejestruj się już teraz!
+						</div>
+					</li>
+					</li>
+					-->
+					<li><a href = "{{ url_for('signup') }}"> Zarejestruj </a></li>
+					{% endif %}	
+					
+				</ul>			
+			</div>
+		</div>
+
+		<div class="container" style="background-color: white; padding-top:25px">
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<div class="alert alert-info">
+						{% for message in messages %}
+							{{ message }} <br>
+						{% endfor %}
+					</div>
+				{% endif %}
+			{% endwith %}
+
+			{% block content %} {% endblock %}
+			<br>
+			<br>
+			<footer style="background-color:white">
+				Dodatkowe linki: <a href ="{{ url_for('terms_of_usage')}}">Regulamin</a>, <a href="{{ url_for('about')}}">O portalu Candela</a>, <a href = {{ url_for('statistics') }}>Statystyki</a>, <a href ="#">Napisz do administratora</a>
+			</footer>
+		</div>
+	</body>
+</html>

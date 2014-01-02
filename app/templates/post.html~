@@ -1,0 +1,13 @@
+<table>
+	<tr valign = "top">
+		<td><img src = "{{post.thumbnail_link}}"></td>
+		<td>
+			<table class="table table-striped">
+				<tr><td><a href ="{{url_for('index')}}">{{post.title}}</a></td></tr>
+				<tr><td><i>Dodane {{post.timestamp}} przez {{post.author.nickname}}</i></td></tr>
+				<tr><td>{{post.body}}</td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<hr>

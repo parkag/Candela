@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>O portalu Candela:</h2>
+
+Portal Candela został zaprojektowany i wykonany przez Grzegorza Parka, studenta Wydziału Fizyki. <br>
+Celem portalu jest polepszenie przepływu informacji między studentami Fizyki Technicznej oraz Fotoniki.
+
+Candela jest projektem typu Open Source, wykonanym przy użyciu technologii:
+	<ul>
+		<li>Flask Microframework (Python)</li>
+		<li>PostgreSQL</li>
+		<li>Zmodyfikowany Twitter Bootstrap</li>
+	</ul> 
+
+Jeżeli masz fajny pomysł na ulepszenie portalu i znasz pythona/js/css, zapraszam do dołączenia do projektu!<br>
+Potrzebne jest jedynie konto na GitHub'ie i dobre chęci :) 
+
+{% endblock %}

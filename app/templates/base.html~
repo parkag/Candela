@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang ="pl">
+	<head>
+		<link href ="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href ="/static/css/bootstrap-responsive.css" rel = "stylesheet">
+		<script src ="http://code.jquery.com/jquery-latest.js"></script>
+		<script src = "/static/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device.width, initial-scale=1.0">
+		<meta charset="utf-8">
+		{% if title %}
+		<title>{{title}} - Candela</title>
+		{% else %}
+		<title>Candela - Wydział Fizyki PW</title>
+		{% endif %}
+	</head>
+	<body>
+			<div class="navbar navbar-static-top">
+				<div class = "navbar-inner">
+					<!--<a class = "btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>-->
+					<a class ="brand" href="/">Candela </a>
+					<ul class = "nav">	
+						<li><a href = "#">Notatki</a></li>
+						<li><a href = "#">Zadania</a></li>
+						<li><a href = "#">Strumień</a></li>
+					</ul>
+					<ul class="nav pull-right"> 
+						{% if g.user.is_authenticated() %}
+						<li><a href = "{{ url_for('profile', nickname = g.user.nickname) }}"></i>Profil</a></li>				
+						<li><a href = "{{ url_for('logout') }}"> Wyloguj </a></li>				
+						{% else %}
+						<li><a href = "{{ url_for('login') }}"> Zaloguj </a></li>				
+						{% endif %}	
+					</ul>			
+				</div>
+			</div>
+			<div class="container">
+				<hr>
+
+				<div class="alert alert-info">
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul>
+						{% for message in messages %}
+						<li> {{ message }} </li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+					{% endwith %}
+				</div>
+
+			{% block content %} {% endblock %}
+			</div>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Regulamin:</h2>
+<ol>
+<li>Użytkownik przestrzega zasad kultury osobistej</li>
+	<ul>
+		<li>Niedopuszczalne jest ubliżanie ani grożenie innym użytkownikom</li>
+	</ul>
+<li>Regulamin może zostać zmieniony.</li>
+</ol>
+{% endblock %}

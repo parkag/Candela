@@ -1,0 +1,14 @@
+<table class="table table-striped">
+	<tr valign = "top">
+		<td rowspan=2 width="60px"><img src = "{{comment.author.avatar(50)}}" class="media-object"></td>
+		<td><i><a href = "{{ url_for('profile', nickname=comment.author.nickname) }}">{{ comment.author.nickname }}</a><small> {{ momentjs(comment.timestamp).fromNow() }}</small></i>
+		{% if comment.author.nickname == user.nickname %}
+		<span class="glyphicon glyphicon-pencil"></span>
+		<a href="{{ url_for('delete', content_type='comment', id = comment.id) }}"><span class="glyphicon glyphicon-remove"></span></a>
+		{% endif %}
+	</tr>
+	<tr>
+		<td>{{ comment.body | safe }}</td>
+	</tr>
+</table>
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Statystyki:</h2>
+
+<h3>Uzytkowników: {{users|count}}</h3>
+<div class = "container" style="width:100%">
+    <div class="row" style="padding:25px;">
+    	<div class="col-md-9">
+    		{% for user in users %}
+				<img src="{{ user.avatar(100) }}"> <b><a href ="{{ url_for('profile', nickname=user.nickname) }}">{{user.nickname}}</a></b>, e-mail: {{user.email}}, 
+				rola: 
+					{% if user.role == 0 %} student 
+					{% else %} administrator
+					{% endif %} <hr>
+			{% endfor %}
+		</div>
+    </div>
+</div>
+{% endblock %}

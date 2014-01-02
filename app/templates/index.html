@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+Tu mogą być popularne #tagi i ewentualnie jakaś karuzela.
+<hr>
+{% if user.nickname %}
+<p>Cześć, {{user.nickname}}</p>
+{% else %}
+<p>Cześć, gościu!</p>
+{% endif %}
+<h2>Aktualności:</h2>
+
+<div class = "container" style="width:100%">
+    <div class="row" style="padding:25px;">
+    	<div class="col-md-9">
+    		{% for post in posts.items %}
+			{% include 'post_short.html' %}
+			{% endfor %}
+			<ul class="pagination">
+    		{% for page in range (1, posts.pages+1) %}
+  			<li><a href="{{ url_for('index', page=page)}}">{{ page }} </a></li>
+			{% endfor %}
+			</ul>
+		</div>
+    	<div class="col-md-3" style='border:2px dashed'>
+    		Na tej stronie znajdują się aktualności wydziałowe oraz studenckie. Propozycje wspólnych wyjść i imprez też są jak najbardziej na miejscu! :)
+    	</div>
+    </div>
+<div class="well">
+	<form class ="form-horizontal" action = "" method="post" name="post">
+		{{form.hidden_tag()}}
+		<table>
+			<tr><td>Dodaj coś:</td></tr>
+			<tr><td>Tytuł:</td><td>{{ form.title(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>Treść</td><td>{{ form.body(size = 500, cols = 100, rows = 4, maxlength = 5000) }}</td></tr>
+			<tr><td>Link do miniaturki:</td><td> {{ form.picture(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>
+				{% for error in form.errors.post %}
+				<span style ="color: red;">[{{error}}]</span><br>
+				{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type ="submit" value="Wyślij"></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+Tu mogą być popularne #tagi i ewentualnie jakaś karuzela.
+<hr>
+{% if user.nickname %}
+<p>Cześć, {{user.nickname}}</p>
+{% else %}
+<p>Cześć, gościu!</p>
+{% endif %}
+<h2>Zadania:</h2>
+
+
+<div class = "container" style="width:100%">
+    <div class="row" style="padding:25px;">
+    	<div class="col-md-9">
+    		{% for post in posts %}
+			{% include 'post.html' %}
+			{% endfor %}
+		</div>
+    	<div class="col-md-3" style='border:2px dashed'>
+    		Tutaj zadajemy pytania i wspólnie szukamy na nie odpowiedzi. Możliwy tryb kolaboracji.
+    	</div>
+    </div>
+<div class="well">
+	<form class ="form-horizontal" action = "" method="post" name="post">
+		{{form.hidden_tag()}}
+		<table>
+			<tr><td>Dodaj coś:</td></tr>
+			<tr><td>Tytuł:</td><td>{{ form.title(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>Treść</td><td>{{ form.body(size = 30, maxlength = 500) }}</td></tr>
+			<tr><td>Link do miniaturki:</td><td> {{ form.picture(size = 30, maxlength = 140) }}</td></tr>
+			<tr><td>
+				{% for error in form.errors.post %}
+				<span style ="color: red;">[{{error}}]</span><br>
+				{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type ="submit" value="Wyślij"></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+{% endblock %}

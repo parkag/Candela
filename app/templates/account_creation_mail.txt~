@@ -1,0 +1,6 @@
+Cześć!
+
+Aby dokończyć proces rejestracji, kliknij w link: {{url_for('index', _external = True)}}
+
+Administracja portalu Candela :)
+

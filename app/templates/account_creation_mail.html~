@@ -1,0 +1,7 @@
+<p>Cześć!</p>
+
+<p>Aby dokończyć proces rejestracji, kliknij w link: <a href ="{{url_for('index', _external = True)}}"> link</a></p>
+
+<p>Pozdrowienia,<br>
+Administracja portalu Candela :)</p>
+

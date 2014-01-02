@@ -1,0 +1,28 @@
+<table class="table table-striped">
+	<tr valign = "top" width= "100%">
+		<td width = "200px" rowspan = "3"><a href ="{{ url_for('detail', post_id = post.id) }}">
+			<img src = "{{post.thumbnail_link}}" width = 200 class ="img-thumbnail" style="max-height: 200px">
+			</a>
+		</td>
+		<td height="30px">
+			<a href ="{{ url_for('detail', post_id = post.id) }}"><b>{{post.title}}</b></a> 
+			{% if post.author.nickname == user.nickname %}
+			<div style="display:block;float:right">
+			<span class="glyphicon glyphicon-pencil" style=""></span>
+			<a href="{{ url_for('delete', content_type='post', id = post.id) }}"><span class="glyphicon glyphicon-remove" style=""></span></a>
+			</div>
+			{% endif %}
+		</td>
+	</tr>
+	<tr height="30px">
+		<td>
+			<i><small>Dodane {{ momentjs(post.timestamp).fromNow() }} przez <a href="{{ url_for('profile', nickname=post.author.nickname) }}">{{post.author.nickname}}</a>, komentarzy: {{post.comments|count}}</small></i>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			{{ post.short | safe }}
+		</td>
+	</tr>
+</table>
+<hr>

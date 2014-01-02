@@ -1,0 +1,19 @@
+<!-- extends from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Zaloguj się </h1>
+<form action ="" method ="post" name="login">
+	{{form.hidden_tag()}}
+		<div class="input-group">
+  		<span class="input-group-addon">Nazwa użytkownika</span>
+  			{{form.username(size = 80, placeholder="Nazwa użytkownika", class="form-control")}}
+  		</div>
+		<div class="input-group">
+  		<span class="input-group-addon">Hasło</span>
+  		{{form.password(size = 80, placeholder = "Hasło", class="form-control")}}
+  		</div>
+	{{form.remember_me}} Zapamiętaj
+	<input type = "submit" value = "Zaloguj">
+</form>
+{% endblock %}

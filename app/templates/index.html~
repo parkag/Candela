@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Cześć, {{user.nickname}}</p>
+<div class="well">
+	<form class ="form-horizontal" action = "" method="post" name="post">
+		{{form.hidden_tag()}}
+		<table>
+			<tr>
+				<td>Napisz cos: </td>
+				<td>{{ form.post(size = 30, maxlength = 140) }}</td>
+				<td>
+					{% for error in form.errors.post %}
+					<span style ="color: red;">[{{error}}]</span><br>
+					{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type ="submit" value="Wyślij"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+{% for post in posts %}
+	{% include 'post.html' %}
+{% endfor %}
+{% endblock %}

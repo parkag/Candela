@@ -1,0 +1,30 @@
+<!-- extends from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Zarejestruj się </h1>
+<form action ="" method ="post" name="login">
+	{{form.hidden_tag()}}
+	<div class="input-group">
+  		<span class="input-group-addon">Nazwa użytkownika</span>
+		{{form.username(size=80, placeholder = "Nazwa użytkownika", class="form-control")}}
+	</div>
+	<div class="input-group">
+  		<span class="input-group-addon">Hasło</span>
+		{{form.password(size=80, placeholder = "Hasło", class ="form-control")}}
+	</div> 
+	<div class="input-group">
+  		<span class="input-group-addon">Powtórz hasło</span>
+		{{form.password_again(size=80, placeholder = "Powtórz hasło", class ="form-control")}}
+	</div>
+	<div class="input-group">
+  		<span class="input-group-addon">E-mail</span>
+		{{form.email(size=80, placeholder = "E-mail (wydziałowy)", class ="form-control")}}
+	</div>
+	<input type = "submit" value = "Zarejestruj">
+</form>
+
+<div class = "container" style="background-color:white">
+	Poprzez rejestrację, użytkownik zobowiązuje się do przestrzegania regulaminu portalu Candela.
+</div>
+{% endblock %}

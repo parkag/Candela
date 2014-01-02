@@ -1,0 +1,15 @@
+body { 
+  background: url(../../static/img/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+img.img-thumbnail {
+  /*background-image: url(../../static/img/img_not_found.jpg);*/
+  width: 200px;
+  min-height: 100px;
+  max-height: 200px;
+  background-size: 105%;
+  -webkit-background-size: 105%;
+}
