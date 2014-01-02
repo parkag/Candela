@@ -277,7 +277,7 @@ def delete(id):
     return redirect(url_for('index'))
 
 @app.route('/statistics')
-@login_required
+#@login_required
 def statistics():
     users = User.query.all()
     return render_template("statistics.html", users = users)

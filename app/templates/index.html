@@ -25,6 +25,7 @@ Tu mogą być popularne #tagi i ewentualnie jakaś karuzela.
     		Na tej stronie znajdują się aktualności wydziałowe oraz studenckie. Propozycje wspólnych wyjść i imprez też są jak najbardziej na miejscu! :)
     	</div>
     </div>
+{% if user.nickname %}
 <div class="well">
 	<form class ="form-horizontal" action = "" method="post" name="post">
 		{{form.hidden_tag()}}
@@ -47,4 +48,5 @@ Tu mogą być popularne #tagi i ewentualnie jakaś karuzela.
 	</form>
 	</div>
 </div>
+{% endif %}
 {% endblock %}
