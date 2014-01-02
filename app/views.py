@@ -49,7 +49,9 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         nick = form.username.data
-        if User.query.filter_by(nickname = nick) is None:
+        us = User.query.filter_by(nickname = nick).first()
+        print us
+        if us is None:
             pass_hash = md5(form.password.data).hexdigest()
             send_email(subject=u'Założenie konta na Candeli',
                     sender = 'grzegorz.parka',
