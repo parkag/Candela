@@ -146,7 +146,7 @@ def edit_profile():
     form = EditForm(g.user.nickname)
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
-        g.user.about_me = form.about_me.data
+        g.user.about_me = re.sub('<[A-Za-z\/][^>]*>', '', form.about_me.data)
         db.session.add(g.user)
         db.session.commit()
         flash('Zmiany zapisane.')
@@ -163,7 +163,7 @@ def notes():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body = form.body.data, 
-                    short = form.body.data[:200], 
+                    short = re.sub('<[A-Za-z\/][^>]*>', '', form.body.data)[:200], 
                     title = form.title.data,
                     thumbnail_link = form.picture.data, 
                     timestamp = datetime.utcnow(),
@@ -187,7 +187,7 @@ def questions():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body = form.body.data,
-                    short = form.body.data[:200],  
+                    short = re.sub('<[A-Za-z\/][^>]*>', '', form.body.data)[:200], 
                     title = form.title.data,
                     thumbnail_link = form.picture.data, 
                     timestamp = datetime.utcnow(),
@@ -211,7 +211,7 @@ def stream():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body = form.body.data,
-                    short = form.body.data[:200], 
+                    short = re.sub('<[A-Za-z\/][^>]*>', '', form.body.data)[:200],
                     title = form.title.data,
                     thumbnail_link = form.picture.data, 
                     timestamp = datetime.utcnow(),
@@ -257,23 +257,19 @@ def detail(post_id):
 def delete(id):
     content_type = request.args.get("content_type")
     if content_type == "post":
-        post = Post.query.get_or_404(id)
-        if post.author.id != g.user.id:
-            flash(u'Nie możesz usunąć tego posta.')
-            return redirect(url_for('index'))
-        db.session.delete(post)
-        db.session.commit()
-        flash(u'Post usunięty.')
+        element = Post.query.get_or_404(id)
     elif content_type == "comment":
-        comment = Comment.query.get_or_404(id)
-        if comment.author.id != g.user.id:
-            flash(u'Nie możesz usunąć tego komentarza.')
-            return redirect(url_for('index'))
-        db.session.delete(comment)
-        db.session.commit()
-        flash(u'Komentarz usunięty.')
+        element = Comment.query.get_or_404(id)
     else:
         redirect(url_for('404'))
+
+    if element.author.id != g.user.id:
+        flash(u'Nie możesz usunąć tego elementu.')
+        return redirect(url_for('index'))
+    
+    db.session.delete(post)
+    db.session.commit()
+    flash(u'Element usunięty.')
     return redirect(url_for('index'))
 
 @app.route('/statistics')
