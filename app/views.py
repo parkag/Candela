@@ -267,7 +267,7 @@ def delete(id):
         flash(u'Nie możesz usunąć tego elementu.')
         return redirect(url_for('index'))
     
-    db.session.delete(post)
+    db.session.delete(element)
     db.session.commit()
     flash(u'Element usunięty.')
     return redirect(url_for('index'))
